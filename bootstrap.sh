@@ -47,6 +47,16 @@ if ! [ "$(ls -a $HOME | grep -i .zcompdump)" ]; then
 fi
 
 # DEV
+if ! [ -x "$(command -v node)" ]; then
+	echo "→ Installing node"
+	brew install node
+fi
+
+if ! [ -x "$(command -v sass)" ]; then
+	echo "→ Installing sass"
+	brew install sass/sass/sass
+fi
+
 if ! [ -x "$(command -v python2)" ]; then
 	echo "→ Installing python@2"
 	brew install python@2
