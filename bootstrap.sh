@@ -27,7 +27,7 @@ brew install findutils
 # -------- TOOLS ---------
 
 echo "\n🛠 Installing tools\n"
-UTILS=(wget git git-flow git-extras ffmpeg itermocil tldr tree vim webkit2png youtube-dl zsh brew-php-switcher eslint)
+UTILS=(wget git git-flow git-extras ffmpeg itermocil tldr tree vim webkit2png youtube-dl zsh brew-php-switcher)
 for util in "${UTILS[@]}"
 do
 	if ! [ -x "$(command -v $util)" ]; then
@@ -51,6 +51,8 @@ if ! [ -x "$(command -v node)" ]; then
 	echo "→ Installing node"
 	brew install node
 fi
+
+npm install -g eslint eslint-plugin-standard eslint-plugin-import eslint-config-standard eslint-config-import eslint-plugin-node eslint-plugin-promise
 
 if ! [ -x "$(command -v sass)" ]; then
 	echo "→ Installing sass"
@@ -79,7 +81,7 @@ heroku update
 echo "\n💼 Installing apps\n"
 APP_FOLDER="/Applications"
 
-APPS=(virtualbox transmit macdown firefox vlc)
+APPS=(virtualbox telegram transmit macdown firefox vlc)
 for app in "${APPS[@]}"
 do
 	if ! [ "$(ls $APP_FOLDER | grep -i $app)" ]; then
@@ -131,11 +133,15 @@ if ! [ -f $ZSH_CUSTOM/themes/spaceship.zsh-theme ]; then
 	ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" $ZSH_CUSTOM/themes/spaceship.zsh-theme
 fi;
 
-# Update .zshrc, create a backup first.
-if [ -f $HOME/.zshrc ]; then
-	cp $HOME/.zshrc $HOME/.zshrc_BACKUP
-fi;
-cp -f dotfiles/.zshrc $HOME/.zshrc
+#dotfiles
+DOTFILES=(.zshrc .vimrc .eslintrc)
+for dotfile in "${DOTFILES[@]}"
+do
+	if [ -f $HOME/$dotfile ]; then
+		cp $HOME/$dotfile $HOME/$dotfile_BACKUP
+	fi
+	cp -f dotfiles/$dotfile $HOME/$dotfile
+done
 
 # -------- EXTRA cli TOOLS ---------
 # sublime from the shell
