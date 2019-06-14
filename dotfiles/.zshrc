@@ -1,5 +1,6 @@
 # Env
 export ZSH=$HOME/.oh-my-zsh
+export PATH="/usr/local/bin:$PATH"
 
 # Plugins
 plugins=(
