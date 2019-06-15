@@ -18,6 +18,7 @@ plugins=(
 # Aliases
 alias ip="ifconfig | grep 'inet ' | cut -f2 -d' '"
 alias update="source $HOME/.zshrc"
+alias tsm="transmission-remote"
 
 # Themes
 SPACESHIP_PROMPT_ORDER=(

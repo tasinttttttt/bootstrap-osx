@@ -27,7 +27,7 @@ brew install findutils
 # -------- TOOLS ---------
 
 echo "\n🛠 Installing tools\n"
-UTILS=(wget git git-flow git-extras ffmpeg itermocil tldr tree vim webkit2png youtube-dl zsh brew-php-switcher)
+UTILS=(wget git git-flow git-extras ffmpeg itermocil tldr tree vim webkit2png youtube-dl zsh brew-php-switcher transmission)
 for util in "${UTILS[@]}"
 do
 	if ! [ -x "$(command -v $util)" ]; then
@@ -81,7 +81,7 @@ heroku update
 echo "\n💼 Installing apps\n"
 APP_FOLDER="/Applications"
 
-APPS=(virtualbox telegram transmit macdown firefox vlc)
+APPS=(virtualbox dropbox telegram keeweb macdown firefox vlc webtorrent)
 for app in "${APPS[@]}"
 do
 	if ! [ "$(ls $APP_FOLDER | grep -i $app)" ]; then
