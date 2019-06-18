@@ -4,13 +4,13 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-echo "\n🚀 Setting up prerequisites\n"
+echo "\n\033[1m🚀 Setting up prerequisites\n\033[0m"
 # -------- PREREQUISITES ---------
 xcode-select --install;
 
 # Check for Homebrew,
 if ! [ -x "$(command -v brew)" ]; then
-	echo "Installing homebrew..."
+	echo "\033[1mInstalling homebrew...\033[0m"
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
@@ -20,52 +20,69 @@ brew update
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew install coreutils
 brew link coreutils
-
-sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
+if ! [ -f /usr/local/bin/sha256sum ]; then
+	sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
+fi;
 brew install findutils
 
 # -------- TOOLS ---------
 
-echo "\n🛠 Installing tools\n"
-UTILS=(wget git git-flow git-extras ffmpeg itermocil tldr tree vim webkit2png youtube-dl zsh brew-php-switcher transmission)
+echo "\n\033[1m🛠 Installing tools\n\033[0m"
+UTILS=(
+	wget
+	git
+	git-flow
+	git-extras
+	ffmpeg
+	itermocil
+	tldr
+	tree
+	vim
+	webkit2png
+	youtube-dl
+	zsh
+	brew-php-switcher
+	transmission
+	php-cs-fixer
+)
 for util in "${UTILS[@]}"
 do
 	if ! [ -x "$(command -v $util)" ]; then
-		echo "→ Installing $util"
+		echo "\n→ \033[1mInstalling $util\033[0m"
 		brew install $util
 	fi
 done
 
 if ! [ -x "$(command -v convert)" ]; then
-	echo "→ Installing imagemagick"
+	echo "\n→ \033[1mInstalling imagemagick\033[0m"
 	brew install imagemagick
 fi
 
 if ! [ "$(ls -a $HOME | grep -i .zcompdump)" ]; then
-	echo "→ Installing zsh-completions"
+	echo "\n→ \033[1mInstalling zsh-completions\033[0m"
 	brew install zsh-completions
 fi
 
 # DEV
 if ! [ -x "$(command -v node)" ]; then
-	echo "→ Installing node"
+	echo "\n→ \033[1mInstalling node\033[0m"
 	brew install node
 fi
 
 npm install -g eslint eslint-plugin-standard eslint-plugin-import eslint-config-standard eslint-config-import eslint-plugin-node eslint-plugin-promise
 
 if ! [ -x "$(command -v sass)" ]; then
-	echo "→ Installing sass"
+	echo "\n→ \033[1mInstalling sass\033[0m"
 	brew install sass/sass/sass
 fi
 
 if ! [ -x "$(command -v python2)" ]; then
-	echo "→ Installing python@2"
+	echo "\n→ \033[1mInstalling python@2\033[0m"
 	brew install python@2
 fi
 
 if ! [ -x "$(command -v python3)" ]; then
-	echo "→ Installing current version of python"
+	echo "\n→ \033[1mInstalling current version of python\033[0m"
 	brew install python
 fi
 
@@ -78,20 +95,29 @@ fi
 heroku update
 
 # -------- APPS ---------
-echo "\n💼 Installing apps\n"
+echo "\n\033[1m💼 Installing apps\n\033[0m"
 APP_FOLDER="/Applications"
 
-APPS=(virtualbox dropbox telegram keeweb macdown firefox vlc webtorrent)
+APPS=(
+	virtualbox
+	dropbox
+	telegram
+	keeweb
+	macdown
+	firefox
+	vlc
+	webtorrent
+)
 for app in "${APPS[@]}"
 do
 	if ! [ "$(ls $APP_FOLDER | grep -i $app)" ]; then
-		echo "\n→ Installing $app..."
+		echo "\n→ \033[1mInstalling $app...\033[0m"
 		brew cask install --appdir=$APP_FOLDER $app
 	fi
 done
 
 if ! [ -x "$(command -v vagrant)" ]; then
-	echo "\n→ Installing vagrant"
+	echo "\n→ \033[1mInstalling vagrant\033[0m"
 	brew cask install --appdir=$APP_FOLDER vagrant
 fi
 
@@ -108,15 +134,15 @@ if ! [ "$(ls $APP_FOLDER | grep -i 'sublime text')" ]; then
 fi
 
 # Install developer friendly quick look plugins; see https://github.com/sindresorhus/quick-look-plugins
-echo "\n🧸 Installing quicklook plugins\n"
+echo "\n\033[1m🧸 Installing quicklook plugins\n\033[0m"
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzip qlimagesize webpquicklook suspicious-package quicklookase qlvideo
 
 # Remove outdated versions from the cellar.
-echo "\n🧼 Cleaning up\n"
+echo "\n\033[1m🧼 Cleaning up\n\033[0m"
 brew cleanup
 
 # -------- SHELL ---------
-echo "\n🐚 Customizing shell\n"
+echo "\n\033[1m🐚 Customizing shell\n\033[0m"
 
 if ! [ -d $HOME/.oh-my-zsh ]; then
 	# oh-my-zsh
@@ -134,7 +160,11 @@ if ! [ -f $ZSH_CUSTOM/themes/spaceship.zsh-theme ]; then
 fi;
 
 #dotfiles
-DOTFILES=(.zshrc .vimrc .eslintrc)
+DOTFILES=(
+	.zshrc
+	.vimrc
+	.eslintrc
+)
 for dotfile in "${DOTFILES[@]}"
 do
 	if [ -f $HOME/$dotfile ]; then
@@ -167,4 +197,4 @@ if ! [ -f $SCRIPT_DIR/transfer.sh ]; then
 	curl -o $SCRIPT_DIR/transfer.sh "https://gist.githubusercontent.com/nl5887/a511f172d3fb3cd0e42d/raw/d2f8a07aca44aa612b6844d8d5e53a05f5da3420/transfer.sh"
 fi;
 
-echo "\n👌 All done!\n"
+echo "\n\033[1m👌 All done!\033[0m"
