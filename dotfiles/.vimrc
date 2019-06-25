@@ -37,7 +37,6 @@ set mouse=a
 set cursorline
 set scrolloff=3 "Shows three lines below or above the cursor when scrolling
 set ruler
-set visualbell
 set ttyfast
 set laststatus=2
 
