@@ -17,8 +17,11 @@ plugins=(
 
 # Aliases
 alias ip="ifconfig | grep 'inet ' | cut -f2 -d' '"
-alias update="source $HOME/.zshrc"
 alias tsm="transmission-remote"
+alias update="source $HOME/.zshrc"
+alias wg="wget -mrkp --progress=dot --random-wait -e robots=off"
+alias yt="youtube-dl"
+alias ytaudio="youtube-dl -x --audio-format mp3 --audio-quality 3"
 
 # Themes
 SPACESHIP_PROMPT_ORDER=(
