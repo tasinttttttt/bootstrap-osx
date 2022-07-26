@@ -40,10 +40,10 @@ UTILS=(
 	vim
 	webkit2png
 	youtube-dl
-	zsh
 	brew-php-switcher
 	transmission
 	php-cs-fixer
+	zsh
 )
 for util in "${UTILS[@]}"
 do
@@ -103,10 +103,13 @@ APPS=(
 	dropbox
 	telegram
 	keeweb
-	macdown
 	firefox
 	vlc
 	webtorrent
+	rectangle
+	visual-studio-code
+	nicotine-plus
+	rescuetime
 )
 for app in "${APPS[@]}"
 do

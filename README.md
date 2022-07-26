@@ -38,16 +38,22 @@ zsh-completions
 google chrome
 firefox
 iterm2
-macdown
 sublime text
-transmit
 vagrant
 virtualbox
+dropbox
+telegram
+keeweb
+firefox
 vlc
+webtorrent
+rectangle
+visual-studio-code
+nicotine-plus
+rescuetime
 
 # 🐚 Scripts / shell tools in ~/scripts
 asimov
 sublime (sublime text from cli)
-transfer.sh
 z
 ```
